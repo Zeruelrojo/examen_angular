@@ -1,0 +1,65 @@
+<div *ngIf="isWindow()" hidden='true'></div>
+<section class="page-section clearfix">
+	<div class="container">
+		<div class="intro">
+			<div class="intro-text left-0 text-center bg-faded p-5 rounded">
+				<h2 class="section-heading mb-4">
+					<span class="section-heading-lower">Empleados</span>
+				</h2>
+				<form>
+					<h2>Enviar Información</h2>
+					<div>
+						<label for="idName">Nombre</label>
+						<input [(ngModel)]='mdlName' name="mdlName" id="idName" type="text">
+					</div>
+					<div>
+						<label for="idLast_name">Apellido</label>
+						<input [(ngModel)]='mdlLast_name' name="mdlLast_name" id="idLast_name" type="text">
+					</div>
+					<div>
+						<label for="idBirthday">Fecha de nacimiento</label>
+						<input [(ngModel)]='mdlBirthday' name="mdlBirthday" id="idBirthday" type="text">
+					</div>
+
+				</form>
+
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> 
+				<button (click)="sendSetempleado()" type="button" class="btn btn-primary" id="btnSend">Enviar</button> 
+
+				<br>
+				<br>
+				<br>
+
+				<h2>Revisión de Información</h2>
+				
+				<label for="idBuscador">Buscar por nombre:</label>
+				<input [(ngModel)]='mdlBuscador' (ngModelChange)="Buscando()" name="mdlBuscador" id="idBuscador"
+					type="text">
+
+				<div *ngIf="mdlRowsGetempleado!=undefined">
+					<table>
+						<tr>
+							<th>id</th>
+							<th>name</th>
+							<th>last_name</th>
+							<th>birthday</th>
+						</tr>
+						<tr *ngFor="let row of mdlRowsGetempleado; let i = index">
+							<td>{{row.id}}</td>
+							<td>{{row.name}}</td>
+							<td>{{row.last_name}}</td>
+							<td>{{row.birthday}}</td>
+						</tr>
+					</table>
+				</div>
+
+
+
+				<button (click)="paginadoMenos()" type="button" class="btn btn-primary" id="btnSend">Atras</button>
+				<button (click)="paginadoMas()" type="button" class="btn btn-primary" id="btnSend">Siguiente</button>
+
+
+			</div>
+		</div>
+	</div>
+</section>

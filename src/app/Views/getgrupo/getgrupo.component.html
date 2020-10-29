@@ -1,0 +1,45 @@
+<div *ngIf="isWindow()" hidden='true'></div>
+
+<label for="idBuscador">Buscar por nombre:</label>
+<input [(ngModel)]='mdlBuscador' (ngModelChange)="Buscando()" name="mdlBuscador" id="idBuscador" type="text">
+
+<section class="disable-select">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-4 mx-auto">
+				<div class="cta-inner text-center rounded">
+					<h2 class="section-heading mb-4">
+						<span class="section-heading-lower">Grupos</span>
+						<div *ngFor="let row of mdlRowsGetgrupo">
+							<div [id]="row.name+row.id" [myId]="row.id" class="droptarget dragGroup-box"
+								(dragstart)="dragstart($event, row.name+row.id, row.id, row.name)"
+								(mousedown)="selectText($event)">
+								{{row.name}}
+							</div>
+						</div>
+					</h2>
+				</div>
+			</div>
+			<div class="col-xl-4 mx-auto">
+				<div class="cta-inner text-center rounded">
+					<h2 class="section-heading mb-4 setscroll">
+						<div class="droptarget dropGroup-box" (dragenter)="dragenter($event)"
+							(dragover)="dragover($event)" (drop)="drop($event)">
+
+							<input *ngIf="mdlGroupSelected" type="checkbox" (change)="selectAll()" checked> {{mdlGroupSelected}}
+
+							<div *ngFor="let row of mdlRowsGetgroupdetail; let i = index">
+								<div class="dragGroup-box">
+									<input type="checkbox" [id]="'employee'+i" (change)="selectRow(i, row.id)" checked> {{row.name}}
+								</div>
+							</div>
+
+						</div>
+					</h2>
+					<button (click)="deleteEmployee()" type="button" class="btn btn-primary" id="btnSend">Borrar Seleccionados</button>
+					<button (click)="continuar()" type="button" class="btn btn-primary" id="btnSend">Continuar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
